@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+{% block head %}
+<head>
+    <meta charset="UTF-8">
+    <title>PCFX</title>
+    <script src="eel.js"></script>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+{% endblock %}
+<body>
+
+
+<button id="show">Leadgen</button>
+<script>
+    let btn = document.querySelector("#show");
+    btn.addEventListener("click", sendData);
+    async function sendData(){
+        await eel.send_data();
+    }
+</script>
+<div class="info">
+
+</div>
+</body>
+</html>

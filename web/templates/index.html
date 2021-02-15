@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>PCFX</title>
+    <script type="text/javascript" src="/eel.js"></script>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div id="info">
+    <h1>Привет!</h1>
+    <h2> Я скрипт предназначенный помочь тебе!</h2>
+    <button id="start" class="shown" onclick="start(this)">Начать</button>
+
+</div>
+<div id="buttons" style="display: none">
+<button id="show" class="shown" onclick="leadgen_btn(this)">Лидогенератор</button>
+<button id="show2" class="shown" onclick="fake_leads__btn(this)">База фейковых лидов</button>
+<button id="show3" class="shown" onclick="check(this)">1000 и 1 позиция</button>
+</div>
+<div id="leadgen" class="leadgen" style="display: none">
+    <div class="wrapper">
+    <div>
+    <h3 class="txt">ccapi.example.net</h3>
+    <input id="location" type="text" placeholder="Введите URL:  " required="" value="">
+        </div>
+    <div>
+    <h3 class="txt">логин юзера синхронизации с api</h3>
+    <input id="location2" type="text" placeholder="Введите Login:  " required="" value="">
+        </div>
+    <div>
+        <h3 class="txt">пароль юзера синхронизации с api</h3>
+    <input id="location3" type="text" placeholder="Введите Password:  " required="" value="">
+        </div>
+        <div>
+            <h3 class="txt">кол-во лидов для проливки по заявке</h3>
+    <input id="location4" type="text" placeholder="Кол-во лидов:  " required="" value="">
+            </div>
+        <div>
+            <h3 class="txt">номер заявки по которой прольются лиды</h3>
+        <input id="location5" type="text" placeholder="Номер заявки:  " required="" value="">
+            </div>
+    </div>
+    <button id="btn" class="shown">Пролить лидов</button>
+    <button id="back1" class="shown" onclick="back1(this)">Назад</button>
+
+    <div id="spinner" class="loader" style="display: none">
+  <div class="inner one"></div>
+  <div class="inner two"></div>
+  <div class="inner three"></div>
+    </div>
+</div>
+<div id="fake_leads" style="display: none">
+    <button id="show4" class="shown" onclick="check(this)">Создать базу фейковых лидов</button>
+    <button id="back2" class="shown" onclick="back2(this)">Назад</button>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p id="modal_text">Файлы будут добавлены в ту же папку, где лежит скрипт</p>
+  </div>
+
+</div>
+<script>
+
+function leadgen_btn(obj) {
+    document.getElementById('buttons').style.display = 'none';
+    document.getElementById('leadgen').style.display = 'block';
+
+}
+function fake_leads__btn(obj) {
+    document.getElementById('buttons').style.display = 'none';
+    document.getElementById('fake_leads').style.display = 'block';
+}
+
+function start(obj) {
+    document.getElementById('info').style.display = 'none';
+    document.getElementById('buttons').style.display = 'block';
+
+}
+function back1(obj) {
+    document.getElementById('leadgen').style.display = 'none';
+    document.getElementById('buttons').style.display = 'block';
+
+}
+function back2(obj) {
+    document.getElementById('fake_leads').style.display = 'none';
+    document.getElementById('buttons').style.display = 'block';
+}
+let btn = document.querySelector("#btn");
+    btn.addEventListener('click', sendData);
+    async function sendData() {
+        let url = document.querySelector("#location").value;
+        let login = document.querySelector("#location2").value;
+        let password = document.querySelector("#location3").value;
+        let sum = document.querySelector("#location4").value;
+        let order = document.querySelector("#location5").value;
+
+        await eel.send(url, login, password, sum, order);
+        document.getElementById('spinner').style.display = 'block';
+    }
+let btn2 = document.querySelector("#show4");
+    btn2.addEventListener('click', startFaking);
+    async function startFaking() {
+
+        await eel.faking();
+        modal.style.display = "block";
+}
+
+
+    // Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn22 = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+</script>
+
+
+</body>
+</html>
